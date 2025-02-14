@@ -1,7 +1,7 @@
 # Mastering Apex Unit Testing - Part 1: Writing Test Classes & Assertions in Salesforce
 
 ## 📺 Watch the Full Session Here:
-🎥 [Mastering Apex Unit Testing - Part 1]()
+🎥 [Mastering Apex Unit Testing - Part 1](https://youtu.be/eKfEsnHcO5s) 
 
 ## Overview  
 This session is the **first part** of our **Apex Unit Test Classes** series! We cover the **fundamentals of unit testing** in Apex and demonstrate writing test classes using a **Math Utility example**.
