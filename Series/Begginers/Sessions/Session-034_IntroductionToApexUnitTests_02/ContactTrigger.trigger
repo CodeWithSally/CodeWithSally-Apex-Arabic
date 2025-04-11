@@ -13,4 +13,4 @@ trigger ContactTrigger on Contact (before insert, before update, after insert, a
             ContactTriggerHandler.onAfterUpdate(trigger.old,trigger.oldMap,trigger.new,trigger.newMap);
         }
     }
-}
+}   
