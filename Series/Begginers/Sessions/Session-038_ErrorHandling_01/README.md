@@ -23,4 +23,4 @@ This session introduces the fundamentals of exception handling in Salesforce Ape
 - Follow structured and maintainable practices for error handling
 
 ## 📺 Watch the Session
-https://youtu.be/jM4ETWWRIKA
+https://youtu.be/leAgnaeybWU
