@@ -13,7 +13,7 @@ This session explains the importance of debugging in Apex and how to work with d
 - DebugDemo.cls
 
 ## 🎥 Watch the session:
-https://youtu.be/luJzNKNqV84
+https://youtu.be/pk-3B-jvZBA
 
 ## 📂 GitHub Folder:
 https://github.com/CodeWithSally/CodeWithSally-Apex-Arabic/tree/main/Series/Begginers/Sessions/Session-040_DebugLogs
