@@ -16,6 +16,3 @@ This is the first session in the Arabic Intermediate Series for Salesforce Apex.
 
 ## 📺 Watch the Session:
 https://youtu.be/TkkBR-fvad4
-
-## 🌐 GitHub Folder:
-https://github.com/CodeWithSally/CodeWithSally-Apex-Arabic/tree/main/Series/Intermediate/Sessions/Session-001_AsynchronousApex
