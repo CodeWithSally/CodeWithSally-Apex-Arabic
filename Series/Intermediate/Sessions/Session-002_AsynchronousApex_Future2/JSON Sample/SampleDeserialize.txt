@@ -1,0 +1,6 @@
+String jsonResponse = '{"name":{"common":"France"},"capital":["Paris"],"region":"Europe"}';
+SimpleCountryWrapper country = (SimpleCountryWrapper) JSON.deserialize(jsonResponse, SimpleCountryWrapper.class);
+
+System.debug('Country Name: ' + country.name.common);  // France
+System.debug('Capital: ' + country.capital[0]);       // Paris
+System.debug('Region: ' + country.region);            // Europe

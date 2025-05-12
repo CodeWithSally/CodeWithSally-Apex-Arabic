@@ -1,0 +1,18 @@
+// Create the wrapper object
+SimpleCountryWrapper country = new SimpleCountryWrapper();
+
+// Set the name details
+country.name = new SimpleCountryWrapper.NameDetails();
+country.name.common = 'France';
+
+// Set the capital
+country.capital = new List<String>{ 'Paris' };
+
+// Set the region
+country.region = 'Europe';
+
+// Convert the wrapper to JSON
+String jsonOutput = JSON.serialize(country);
+
+// Debug the result
+System.debug(jsonOutput);

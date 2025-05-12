@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "14a26c2d-cb71-4c1f-9138-b5e1f30e4727",
+		"name": "REST Countries API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3558162"
+	},
+	"item": [
+		{
+			"name": "GetAllCountries",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GetCountryByName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restcountries.com/v3.1/name/Egypt",
+					"protocol": "https",
+					"host": [
+						"restcountries",
+						"com"
+					],
+					"path": [
+						"v3.1",
+						"name",
+						"Egypt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCountriedByLanguage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://restcountries.com/v3.1/lang/{language}",
+					"protocol": "https",
+					"host": [
+						"restcountries",
+						"com"
+					],
+					"path": [
+						"v3.1",
+						"lang",
+						"{language}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

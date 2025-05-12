@@ -1,0 +1,663 @@
+[
+    {
+        "name": {
+            "common": "Egypt",
+            "official": "Arab Republic of Egypt",
+            "nativeName": {
+                "ara": {
+                    "official": "جمهورية مصر العربية",
+                    "common": "مصر"
+                }
+            }
+        },
+        "tld": [
+            ".eg",
+            ".مصر"
+        ],
+        "cca2": "EG",
+        "ccn3": "818",
+        "cca3": "EGY",
+        "cioc": "EGY",
+        "independent": true,
+        "status": "officially-assigned",
+        "unMember": true,
+        "currencies": {
+            "EGP": {
+                "name": "Egyptian pound",
+                "symbol": "£"
+            }
+        },
+        "idd": {
+            "root": "+2",
+            "suffixes": [
+                "0"
+            ]
+        },
+        "capital": [
+            "Cairo"
+        ],
+        "altSpellings": [
+            "EG",
+            "Arab Republic of Egypt"
+        ],
+        "region": "Africa",
+        "subregion": "Northern Africa",
+        "languages": {
+            "ara": "Arabic"
+        },
+        "translations": {
+            "ara": {
+                "official": "جمهورية مصر العربية",
+                "common": "مصر"
+            },
+            "bre": {
+                "official": "Republik arab Egipt",
+                "common": "Egipt"
+            },
+            "ces": {
+                "official": "Egyptská arabská republika",
+                "common": "Egypt"
+            },
+            "cym": {
+                "official": "Gweriniaeth Arabaidd yr Aifft",
+                "common": "Yr Aifft"
+            },
+            "deu": {
+                "official": "Arabische Republik Ägypten",
+                "common": "Ägypten"
+            },
+            "est": {
+                "official": "Egiptuse Araabia Vabariik",
+                "common": "Egiptus"
+            },
+            "fin": {
+                "official": "Egyptin arabitasavalta",
+                "common": "Egypti"
+            },
+            "fra": {
+                "official": "République arabe d'Égypte",
+                "common": "Égypte"
+            },
+            "hrv": {
+                "official": "Arapska Republika Egipat",
+                "common": "Egipat"
+            },
+            "hun": {
+                "official": "Egyiptomi Arab Köztársaság",
+                "common": "Egyiptom"
+            },
+            "ita": {
+                "official": "Repubblica araba d'Egitto",
+                "common": "Egitto"
+            },
+            "jpn": {
+                "official": "エジプト·アラブ共和国",
+                "common": "エジプト"
+            },
+            "kor": {
+                "official": "이집트 아랍 공화국",
+                "common": "이집트"
+            },
+            "nld": {
+                "official": "Arabische Republiek Egypte",
+                "common": "Egypte"
+            },
+            "per": {
+                "official": "جمهوری عربی مصر",
+                "common": "مصر"
+            },
+            "pol": {
+                "official": "Arabska Republika Egiptu",
+                "common": "Egipt"
+            },
+            "por": {
+                "official": "República Árabe do Egipto",
+                "common": "Egito"
+            },
+            "rus": {
+                "official": "Арабская Республика Египет",
+                "common": "Египет"
+            },
+            "slk": {
+                "official": "Egyptská arabská republika",
+                "common": "Egypt"
+            },
+            "spa": {
+                "official": "República Árabe de Egipto",
+                "common": "Egipto"
+            },
+            "srp": {
+                "official": "Арапска Република Египат",
+                "common": "Египат"
+            },
+            "swe": {
+                "official": "Arabrepubliken Egypten",
+                "common": "Egypten"
+            },
+            "tur": {
+                "official": "Mısır Arap Cumhuriyeti",
+                "common": "Mısır"
+            },
+            "urd": {
+                "official": "مصری عرب جمہوریہ",
+                "common": "مصر"
+            },
+            "zho": {
+                "official": "阿拉伯埃及共和国",
+                "common": "埃及"
+            }
+        },
+        "latlng": [
+            27.0,
+            30.0
+        ],
+        "landlocked": false,
+        "borders": [
+            "ISR",
+            "LBY",
+            "PSE",
+            "SDN"
+        ],
+        "area": 1002450.0,
+        "demonyms": {
+            "eng": {
+                "f": "Egyptian",
+                "m": "Egyptian"
+            },
+            "fra": {
+                "f": "Égyptienne",
+                "m": "Égyptien"
+            }
+        },
+        "flag": "🇪🇬",
+        "maps": {
+            "googleMaps": "https://goo.gl/maps/uoDRhXbsqjG6L7VG7",
+            "openStreetMaps": "https://www.openstreetmap.org/relation/1473947"
+        },
+        "population": 102334403,
+        "gini": {
+            "2017": 31.5
+        },
+        "fifa": "EGY",
+        "car": {
+            "signs": [
+                "ET"
+            ],
+            "side": "right"
+        },
+        "timezones": [
+            "UTC+02:00"
+        ],
+        "continents": [
+            "Africa"
+        ],
+        "flags": {
+            "png": "https://flagcdn.com/w320/eg.png",
+            "svg": "https://flagcdn.com/eg.svg",
+            "alt": "The flag of Egypt is composed of three equal horizontal bands of red, white and black, with Egypt's national emblem — a hoist-side facing gold eagle of Saladin — centered in the white band."
+        },
+        "coatOfArms": {
+            "png": "https://mainfacts.com/media/images/coats_of_arms/eg.png",
+            "svg": "https://mainfacts.com/media/images/coats_of_arms/eg.svg"
+        },
+        "startOfWeek": "sunday",
+        "capitalInfo": {
+            "latlng": [
+                30.05,
+                31.25
+            ]
+        },
+        "postalCode": {
+            "format": "#####",
+            "regex": "^(\\d{5})$"
+        }
+    },
+    {
+        "name": {
+            "common": "Canada",
+            "official": "Canada",
+            "nativeName": {
+                "eng": {
+                    "official": "Canada",
+                    "common": "Canada"
+                },
+                "fra": {
+                    "official": "Canada",
+                    "common": "Canada"
+                }
+            }
+        },
+        "tld": [
+            ".ca"
+        ],
+        "cca2": "CA",
+        "ccn3": "124",
+        "cca3": "CAN",
+        "cioc": "CAN",
+        "independent": true,
+        "status": "officially-assigned",
+        "unMember": true,
+        "currencies": {
+            "CAD": {
+                "name": "Canadian dollar",
+                "symbol": "$"
+            }
+        },
+        "idd": {
+            "root": "+1",
+            "suffixes": [
+                ""
+            ]
+        },
+        "capital": [
+            "Ottawa"
+        ],
+        "altSpellings": [
+            "CA"
+        ],
+        "region": "Americas",
+        "subregion": "North America",
+        "languages": {
+            "eng": "English",
+            "fra": "French"
+        },
+        "translations": {
+            "ara": {
+                "official": "كندا",
+                "common": "كندا"
+            },
+            "bre": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "ces": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "cym": {
+                "official": "Canada",
+                "common": "Canada"
+            },
+            "deu": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "est": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "fin": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "fra": {
+                "official": "Canada",
+                "common": "Canada"
+            },
+            "hrv": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "hun": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "ita": {
+                "official": "Canada",
+                "common": "Canada"
+            },
+            "jpn": {
+                "official": "カナダ",
+                "common": "カナダ"
+            },
+            "kor": {
+                "official": "캐나다",
+                "common": "캐나다"
+            },
+            "nld": {
+                "official": "Canada",
+                "common": "Canada"
+            },
+            "per": {
+                "official": "کانادا",
+                "common": "کانادا"
+            },
+            "pol": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "por": {
+                "official": "Canadá",
+                "common": "Canadá"
+            },
+            "rus": {
+                "official": "Канада",
+                "common": "Канада"
+            },
+            "slk": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "spa": {
+                "official": "Canadá",
+                "common": "Canadá"
+            },
+            "srp": {
+                "official": "Канада",
+                "common": "Канада"
+            },
+            "swe": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "tur": {
+                "official": "Kanada",
+                "common": "Kanada"
+            },
+            "urd": {
+                "official": "کینیڈا",
+                "common": "کینیڈا"
+            },
+            "zho": {
+                "official": "加拿大",
+                "common": "加拿大"
+            }
+        },
+        "latlng": [
+            60.0,
+            -95.0
+        ],
+        "landlocked": false,
+        "borders": [
+            "USA"
+        ],
+        "area": 9984670.0,
+        "demonyms": {
+            "eng": {
+                "f": "Canadian",
+                "m": "Canadian"
+            },
+            "fra": {
+                "f": "Canadienne",
+                "m": "Canadien"
+            }
+        },
+        "flag": "🇨🇦",
+        "maps": {
+            "googleMaps": "https://goo.gl/maps/jmEVLugreeqiZXxbA",
+            "openStreetMaps": "https://www.openstreetmap.org/relation/1428125"
+        },
+        "population": 38005238,
+        "gini": {
+            "2017": 33.3
+        },
+        "fifa": "CAN",
+        "car": {
+            "signs": [
+                "CDN"
+            ],
+            "side": "right"
+        },
+        "timezones": [
+            "UTC-08:00",
+            "UTC-07:00",
+            "UTC-06:00",
+            "UTC-05:00",
+            "UTC-04:00",
+            "UTC-03:30"
+        ],
+        "continents": [
+            "North America"
+        ],
+        "flags": {
+            "png": "https://flagcdn.com/w320/ca.png",
+            "svg": "https://flagcdn.com/ca.svg",
+            "alt": "The flag of Canada is composed of a red vertical band on the hoist and fly sides and a central white square that is twice the width of the vertical bands. A large eleven-pointed red maple leaf is centered in the white square."
+        },
+        "coatOfArms": {
+            "png": "https://mainfacts.com/media/images/coats_of_arms/ca.png",
+            "svg": "https://mainfacts.com/media/images/coats_of_arms/ca.svg"
+        },
+        "startOfWeek": "sunday",
+        "capitalInfo": {
+            "latlng": [
+                45.42,
+                -75.7
+            ]
+        },
+        "postalCode": {
+            "format": "@#@ #@#",
+            "regex": "^([ABCEGHJKLMNPRSTVXY]\\d[ABCEGHJKLMNPRSTVWXYZ]) ?(\\d[ABCEGHJKLMNPRSTVWXYZ]\\d)$"
+        }
+    },
+    {
+        "name": {
+            "common": "France",
+            "official": "French Republic",
+            "nativeName": {
+                "fra": {
+                    "official": "République française",
+                    "common": "France"
+                }
+            }
+        },
+        "tld": [
+            ".fr"
+        ],
+        "cca2": "FR",
+        "ccn3": "250",
+        "cca3": "FRA",
+        "cioc": "FRA",
+        "independent": true,
+        "status": "officially-assigned",
+        "unMember": true,
+        "currencies": {
+            "EUR": {
+                "name": "Euro",
+                "symbol": "€"
+            }
+        },
+        "idd": {
+            "root": "+3",
+            "suffixes": [
+                "3"
+            ]
+        },
+        "capital": [
+            "Paris"
+        ],
+        "altSpellings": [
+            "FR",
+            "French Republic",
+            "République française"
+        ],
+        "region": "Europe",
+        "subregion": "Western Europe",
+        "languages": {
+            "fra": "French"
+        },
+        "translations": {
+            "ara": {
+                "official": "الجمهورية الفرنسية",
+                "common": "فرنسا"
+            },
+            "bre": {
+                "official": "Republik Frañs",
+                "common": "Frañs"
+            },
+            "ces": {
+                "official": "Francouzská republika",
+                "common": "Francie"
+            },
+            "cym": {
+                "official": "French Republic",
+                "common": "France"
+            },
+            "deu": {
+                "official": "Französische Republik",
+                "common": "Frankreich"
+            },
+            "est": {
+                "official": "Prantsuse Vabariik",
+                "common": "Prantsusmaa"
+            },
+            "fin": {
+                "official": "Ranskan tasavalta",
+                "common": "Ranska"
+            },
+            "fra": {
+                "official": "République française",
+                "common": "France"
+            },
+            "hrv": {
+                "official": "Francuska Republika",
+                "common": "Francuska"
+            },
+            "hun": {
+                "official": "Francia Köztársaság",
+                "common": "Franciaország"
+            },
+            "ita": {
+                "official": "Repubblica francese",
+                "common": "Francia"
+            },
+            "jpn": {
+                "official": "フランス共和国",
+                "common": "フランス"
+            },
+            "kor": {
+                "official": "프랑스 공화국",
+                "common": "프랑스"
+            },
+            "nld": {
+                "official": "Franse Republiek",
+                "common": "Frankrijk"
+            },
+            "per": {
+                "official": "جمهوری فرانسه",
+                "common": "فرانسه"
+            },
+            "pol": {
+                "official": "Republika Francuska",
+                "common": "Francja"
+            },
+            "por": {
+                "official": "República Francesa",
+                "common": "França"
+            },
+            "rus": {
+                "official": "Французская Республика",
+                "common": "Франция"
+            },
+            "slk": {
+                "official": "Francúzska republika",
+                "common": "Francúzsko"
+            },
+            "spa": {
+                "official": "República francés",
+                "common": "Francia"
+            },
+            "srp": {
+                "official": "Француска Република",
+                "common": "Француска"
+            },
+            "swe": {
+                "official": "Republiken Frankrike",
+                "common": "Frankrike"
+            },
+            "tur": {
+                "official": "Fransa Cumhuriyeti",
+                "common": "Fransa"
+            },
+            "urd": {
+                "official": "جمہوریہ فرانس",
+                "common": "فرانس"
+            },
+            "zho": {
+                "official": "法兰西共和国",
+                "common": "法国"
+            }
+        },
+        "latlng": [
+            46.0,
+            2.0
+        ],
+        "landlocked": false,
+        "borders": [
+            "AND",
+            "BEL",
+            "DEU",
+            "ITA",
+            "LUX",
+            "MCO",
+            "ESP",
+            "CHE"
+        ],
+        "area": 551695.0,
+        "demonyms": {
+            "eng": {
+                "f": "French",
+                "m": "French"
+            },
+            "fra": {
+                "f": "Française",
+                "m": "Français"
+            }
+        },
+        "flag": "🇫🇷",
+        "maps": {
+            "googleMaps": "https://goo.gl/maps/g7QxxSFsWyTPKuzd7",
+            "openStreetMaps": "https://www.openstreetmap.org/relation/1403916"
+        },
+        "population": 67391582,
+        "gini": {
+            "2018": 32.4
+        },
+        "fifa": "FRA",
+        "car": {
+            "signs": [
+                "F"
+            ],
+            "side": "right"
+        },
+        "timezones": [
+            "UTC-10:00",
+            "UTC-09:30",
+            "UTC-09:00",
+            "UTC-08:00",
+            "UTC-04:00",
+            "UTC-03:00",
+            "UTC+01:00",
+            "UTC+02:00",
+            "UTC+03:00",
+            "UTC+04:00",
+            "UTC+05:00",
+            "UTC+10:00",
+            "UTC+11:00",
+            "UTC+12:00"
+        ],
+        "continents": [
+            "Europe"
+        ],
+        "flags": {
+            "png": "https://flagcdn.com/w320/fr.png",
+            "svg": "https://flagcdn.com/fr.svg",
+            "alt": "The flag of France is composed of three equal vertical bands of blue, white and red."
+        },
+        "coatOfArms": {
+            "png": "https://mainfacts.com/media/images/coats_of_arms/fr.png",
+            "svg": "https://mainfacts.com/media/images/coats_of_arms/fr.svg"
+        },
+        "startOfWeek": "monday",
+        "capitalInfo": {
+            "latlng": [
+                48.87,
+                2.33
+            ]
+        },
+        "postalCode": {
+            "format": "#####",
+            "regex": "^(\\d{5})$"
+        }
+    }
+]
