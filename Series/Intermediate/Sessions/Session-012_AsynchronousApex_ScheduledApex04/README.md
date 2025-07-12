@@ -14,7 +14,6 @@
 - Job state persistence and transient variables
 - Job behavior when paused and resumed
 
-## 📂 Resources:
 ---
 
 ## 📁 Folder Contents
