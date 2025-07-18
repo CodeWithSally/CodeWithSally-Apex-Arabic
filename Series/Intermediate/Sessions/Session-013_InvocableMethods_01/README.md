@@ -38,6 +38,6 @@ Hint: Focus on bulk test scenarios and verify output matches input order!
 Follow more sessions, examples, and practice on:
 - 🌐 [codewithsally.com](https://codewithsally.com)
 - 📺 [YouTube - Code With Sally](https://youtube.com/@codewithsally)
-- 💼 [LinkedIn - Code With Sally](https://www.linkedin.com/company/code-with-sally)
+- 💼 [LinkedIn - Code With Sally](https://www.linkedin.com/company/codewithsally/)
 
 ---
