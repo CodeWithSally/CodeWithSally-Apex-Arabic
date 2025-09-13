@@ -1,0 +1,1526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <activeVersionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_15</activeVersionIdentifier>
+    <description>Generates a sales email for a selected property and appends a grounded list of similar properties from Apex.</description>
+    <developerName>Similar_Properties_Email</developerName>
+    <masterLabel>Similar Properties Email</masterLabel>
+    <relatedEntity>Contact</relatedEntity>
+    <templateVersions>
+        <content>You’re a real estate agent, and your name is {!$Input:Sender.Name} , with phone {!$Input:Sender.Phone} and email {!$Input:Sender.Email}.  
+You belong to an organization called Dreamhouse, and you sell luxury houses.  
+Your prospect is {!$Input:Recipient.Name}. You want to send them a personalized email highlighting a property they’re interested in and suggesting other similar properties.  
+
+Instructions:  
+- Use a clear, concise, and persuasive tone.  
+- Start with an introduction of yourself and your role.  
+- Highlight the main features of the selected property:  
+  - {!$Input:Property__c.Name}, located in {!$Input:Property__c.City__c}, with {!$Input:Property__c.Beds__c} beds and {!$Input:Property__c.Baths__c} baths.  
+  - Price: {!$Input:Property__c.Price__c}.  
+- Then, include the following list of similar properties, provided by Apex grounding:  {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+- End with a strong call-to-action encouraging the prospect to reply or schedule a property viewing this week.  
+
+Output format:  
+Subject: [short, engaging subject line]  
+Body: [well-structured email text with intro, property details, similar properties list, and call-to-action]  
+
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_1</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent writing on behalf of {!$Input:Sender.Name} from Dreamhouse.  
+The recipient is {!$Input:Recipient.Name}. They have already shown interest in the property below.  
+Write a personalized, professional email that highlights this property and introduces similar ones.
+
+Instructions:
+- Write in a clear, persuasive, but friendly tone.  
+- Omit any detail if the value is missing (e.g., phone, image).  
+- Format the email with short paragraphs and headings to make it easy to read.  
+
+Main Property Section:
+- Introduce it as the property the prospect already expressed interest in.  
+- Show the property Name {!$Input:Property__c.Name}, City {!$Input:Property__c.City__c}, number of bedrooms {!$Input:Property__c.Beds__c}, number of bathrooms {!$Input:Property__c.Baths__c}, and price {!$Input:Property__c.Price__c}.  
+- If an image URL exists {!$Input:Property__c.Picture__c}, include it as an image in the email. Do not show the URL if no image exists.  
+
+Similar Properties Section:
+- Title it “Similar Properties You May Like.”  
+- Use the list of properties provided from Apex: {!$Apex:PropertySimilarSalesEmailAction.Prompt}  
+- Present them in a clean table format with columns for Property, Location, Beds, Baths, Price.  
+- If image URLs exist, add them as small images in a separate column. Skip the column if no images exist.  
+
+Closing:
+- End with a strong call-to-action inviting the prospect to reply or schedule a viewing.  
+- Sign off with the sender’s name, organization (Dreamhouse), and include phone {!$Input:Sender.Phone} and email {!$Input:Sender.Email} only if they are available.  
+
+Output format:
+- Subject: [a short, engaging subject line about the property or opportunity]  
+- Body: [well-structured email with intro, main property details, similar properties, and call-to-action]  
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_6</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.  
+
+Context:  
+- Your name is {!$Input:Sender.Name}.  
+- If a phone number exists, include it: {!$Input:Sender.Phone}. If empty, skip it.  
+- If an email exists, include it: {!$Input:Sender.Email}. If empty, skip it.  
+- You belong to an organization called Dreamhouse, specializing in luxury properties.  
+- The prospect is {!$Input:Recipient.Name}.  
+
+Goal:  
+Send a personalized, persuasive email highlighting the selected property and suggesting similar properties.  
+
+Instructions:  
+1. **Start with a warm greeting** to the prospect and a short self-introduction (name, role, company).  
+2. **Highlight the main property clearly**:  
+  - Name: {!$Input:Property__c.Name}  
+  - Location: {!$Input:Property__c.City__c}  
+  - Beds: {!$Input:Property__c.Beds__c}  
+  - Baths: {!$Input:Property__c.Baths__c}  
+  - Price: {!$Input:Property__c.Price__c}  
+  - If an image URL exists, include it as `&lt;img src=&quot;URL&quot; alt=&quot;Property photo&quot; width=&quot;300&quot;/&gt;`. If no URL, omit it.  
+3. **Include a section titled “Similar Properties You May Like”** using data from Apex grounding:  
+  {!$Apex:PropertySimilarSalesEmailAction.Prompt}  
+  - Display these in a neat **HTML table** with columns: Property, Location, Beds, Baths, Price.  
+  - If image URLs exist, include an additional “Image” column with `&lt;img&gt;` tags (width=200). If no image, skip the column.  
+  - Do not display empty fields.  
+4. **End with a clear call-to-action**, inviting the prospect to schedule a viewing or reply.  
+5. Keep the tone **friendly, professional, and persuasive**.  
+
+Output format:  
+Subject: [short, engaging subject line about the property or opportunity]  
+Body: [structured email with greeting, property details, similar properties table, and call-to-action. Signature block at the end with only available contact info.]
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_3</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.  
+Generate the output strictly as **HTML** (no Markdown, no `**bold**`).  
+
+Context:  
+- Sender: {!$Input:Sender.Name}  
+- Phone: {!$Input:Sender.Phone} (skip if empty)  
+- Email: {!$Input:Sender.Email} (skip if empty)  
+- Organization: Dreamhouse (luxury properties)  
+- Prospect: {!$Input:Recipient.Name}  
+
+Goal:  
+Send a polished email that introduces yourself, highlights the main property, and suggests similar properties.  
+
+Instructions:  
+1. Use `&lt;p&gt;` for paragraphs and `&lt;br/&gt;` only where needed.  
+2. Start with a greeting like: &quot;Dear {!$Input:Recipient.Name},&quot;.  
+3. Write a short introduction of yourself and Dreamhouse.  
+4. Highlight the **main property** in a structured block:  
+  - Property Name: {!$Input:Property__c.Name}  
+  - Location: {!$Input:Property__c.City__c}  
+  - Beds: {!$Input:Property__c.Beds__c}, Baths: {!$Input:Property__c.Baths__c}  
+  - Price: {!$Input:Property__c.Price__c}  
+  - If an image URL exists: `&lt;img src=&quot;{!$Input:Property__c.Picture__c}&quot; alt=&quot;Property photo&quot; width=&quot;300&quot;/&gt;`  
+5. Add a section titled &quot;Similar Properties You May Like&quot;.  
+  - Insert {!$Apex:PropertySimilarSalesEmailAction.Prompt} into an HTML `&lt;table&gt;` with headers: Property | Location | Beds | Baths | Price | Image.  
+  - If image URLs exist, show them as `&lt;img src=&quot;...&quot; width=&quot;200&quot;/&gt;`. Skip empty fields.  
+6. End with a clear call-to-action paragraph inviting the recipient to schedule a viewing or reply.  
+7. Add a closing signature block:  
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_4</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You’re a real estate agent, and your name is {!$Input:Sender.Name} , with phone {!$Input:Sender.Phone} and email {!$Input:Sender.Email}.  
+You belong to an organization called Dreamhouse, and you sell luxury houses.  
+Your prospect is {!$Input:Recipient.Name}. You want to send them a personalized email highlighting a property they’re interested in and suggesting other similar properties.  
+
+Instructions:  
+- Use a clear, concise, and persuasive tone.  
+- **omit any field that is empty** (e.g., if phone is not available, skip it).  
+- Start with an introduction of yourself and your role.  
+
+ - Highlight the main features of the selected property:  
+       - {!$Input:Property__c.Name}, located in {!$Input:Property__c.City__c}, with {!$Input:Property__c.Beds__c} beds and {!$Input:Property__c.Baths__c} baths.  
+       - Price: {!$Input:Property__c.Price__c}.  
+       - If an image URL exists, render it as an HTML &lt;img&gt; tag (width=300). If no image URL exists, do not include any reference to it.  
+
+- Then, include a section titled &quot;Similar Properties You May Like&quot; provided by Apex grounding: {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+- Display these properties in a clean table format with columns: Property, Location, Beds, Baths, Price.  
+- If image URLs are available, include an image column with &lt;img&gt; tags; otherwise skip the column.  
+- Only show properties if data exists. 
+
+- End with a strong call-to-action encouraging the prospect to reply or schedule a property viewing this week.  
+
+Output format:  
+Subject: [short, engaging subject line]  
+Body: [well-structured email text with intro, property details, similar properties list, and call-to-action]  
+
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_2</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.  
+Generate the output strictly as **HTML** (no Markdown, no `**bold**`).  
+
+Context:  
+- Sender: {!$Input:Sender.Name}  
+- Phone: {!$Input:Sender.Phone} (skip if empty)  
+- Email: {!$Input:Sender.Email} (skip if empty)  
+- Organization: Dreamhouse (luxury properties)  
+- Prospect: {!$Input:Recipient.Name}  
+
+Goal:  
+Send a polished email that introduces yourself, highlights the main property, and suggests similar properties.  
+
+Instructions:  
+1. Use `&lt;p&gt;` for paragraphs and `&lt;br/&gt;` only where needed.  
+2. Start with a greeting like: &quot;Dear {!$Input:Recipient.Name},&quot;.  
+3. Write a short introduction of yourself and Dreamhouse.  
+4. Highlight the **main property** in a structured block:  
+  - Property Name: {!$Input:Property__c.Name}  
+  - Location: {!$Input:Property__c.City__c}  
+  - Beds: {!$Input:Property__c.Beds__c}, Baths: {!$Input:Property__c.Baths__c}  
+  - Price: {!$Input:Property__c.Price__c}  
+  - If an image URL exists: `&lt;img src=&quot;{!$Input:Property__c.Picture__c}&quot; alt=&quot;Property photo&quot; width=&quot;300&quot;/&gt;`  
+5. Add a section titled &quot;Similar Properties You May Like&quot;.  
+  - Insert {!$Apex:PropertySimilarSalesEmailAction.Prompt} into an HTML `&lt;table&gt;` with headers: Property | Location | Beds | Baths | Price | Image.  
+  - If image URLs exist, show them as `&lt;img src=&quot;...&quot; width=&quot;200&quot;/&gt;`. Skip empty fields.  
+6. End with a clear call-to-action paragraph inviting the recipient to schedule a viewing or reply.  
+7. Add a closing signature block:  
+
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_5</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with: &lt;p&gt;Dear {!$Input:Recipient.Name},&lt;/p&gt;
+  - One short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+  - Add &lt;h3 style=&quot;margin:16px 0 8px;&quot;&gt;Main Property&lt;/h3&gt;
+  - Render a two-column table “card” (border=0) with left side details and right side image:
+   &lt;table style=&quot;width:100%; border-collapse:collapse; margin:8px 0;&quot;&gt;
+    &lt;tr&gt;
+     &lt;td style=&quot;vertical-align:top; padding-right:16px;&quot;&gt;
+      &lt;p style=&quot;margin:0;&quot;&gt;&lt;strong&gt;Property:&lt;/strong&gt; {!$Input:Property__c.Name}&lt;/p&gt;
+      &lt;p style=&quot;margin:4px 0;&quot;&gt;&lt;strong&gt;Location:&lt;/strong&gt; {!$Input:Property__c.City__c}&lt;/p&gt;
+      &lt;p style=&quot;margin:4px 0;&quot;&gt;&lt;strong&gt;Beds:&lt;/strong&gt; {!$Input:Property__c.Beds__c} &amp;nbsp; &lt;strong&gt;Baths:&lt;/strong&gt; {!$Input:Property__c.Baths__c}&lt;/p&gt;
+      &lt;p style=&quot;margin:4px 0;&quot;&gt;&lt;strong&gt;Price:&lt;/strong&gt; {!$Input:Property__c.Price__c}&lt;/p&gt;
+     &lt;/td&gt;
+     &lt;td style=&quot;vertical-align:top; text-align:right;&quot;&gt;
+      &lt;!-- Only include this &lt;img&gt; if a Picture URL exists; otherwise omit the entire &lt;img&gt;. --&gt;
+      &lt;img src=&quot;{!$Input:Property__c.Picture__c}&quot; alt=&quot;Property photo&quot; width=&quot;320&quot; style=&quot;border-radius:6px;&quot;/&gt;
+     &lt;/td&gt;
+    &lt;/tr&gt;
+   &lt;/table&gt;
+
+3) Similar properties
+  - Title: &lt;h3 style=&quot;margin:16px 0 8px;&quot;&gt;Similar Properties You May Like&lt;/h3&gt;
+  - The Apex action returns a JSON string at {!$Apex:PropertySimilarSalesEmailAction.Prompt}.
+   Parse that JSON. It includes an array named &quot;similars&quot; with fields:
+   name, city, beds, baths, price, pictureUrl.
+  - If the array is empty or missing, omit this section entirely.
+  - Otherwise, render a compact HTML table:
+   &lt;table style=&quot;width:100%; border-collapse:collapse;&quot;&gt;
+    &lt;thead&gt;
+     &lt;tr&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Property&lt;/th&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Location&lt;/th&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Beds&lt;/th&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Baths&lt;/th&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Price&lt;/th&gt;
+      &lt;th style=&quot;text-align:left; border-bottom:1px solid #eee; padding:8px;&quot;&gt;Image&lt;/th&gt;
+     &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+     &lt;!-- For each item in &quot;similars&quot;, add a &lt;tr&gt;. Omit the Image &lt;td&gt; if pictureUrl is missing. --&gt;
+    &lt;/tbody&gt;
+   &lt;/table&gt;
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+  &lt;p style=&quot;margin-top:16px;&quot;&gt;
+   Best regards,&lt;br/&gt;
+   {!$Input:Sender.Name}&lt;br/&gt;
+   Dreamhouse&lt;br/&gt;
+   &lt;!-- Omit the following lines if values are empty --&gt;
+   {!$Input:Sender.Phone}&lt;br/&gt;
+   {!$Input:Sender.Email}
+  &lt;/p&gt;
+
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_7</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called Main Property.
+    - Present the details in a simple two-column layout:
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists.
+         - If no picture URL, leave out the image completely.
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: Similar Properties You May Like.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}.
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in similars, skip this entire section.
+    - If there are items:
+            - Present them in a neat table.
+            - Columns (in order): Property, Location, Beds, Baths, Price, Image.
+            - For each property, fill a single row with those values.
+            - Only show the Image cell if a picture URL exists; otherwise, leave that cell out for that row.
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in two separate lines your phone {!$Input:Sender.Phone} and your email {!$Input:Sender.Email} [Omit those lines if values are empty
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_8</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called Main Property.
+    - Present the details in a simple two-column layout that is centered and only 60% of the space:
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 200x200 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: Similar Properties You May Like.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}.
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in similars, skip this entire section.
+    - If there are items:
+            - Present them in a neat table.
+            - Columns (in order): Property, Location, Beds, Baths, Price, Image.
+            - For each property, fill a single row with those values.
+            - Only show the Image cell if a picture URL exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in two separate lines your phone {!$Input:Sender.Phone} and your email {!$Input:Sender.Email} [Omit those lines if values are empty
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_9</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called Property of Interest.
+    - Present the details in a simple two-column layout that is centered and only 60% of the space:
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: Similar Properties You May Like.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}.
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in similars, skip this entire section.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Columns (in order): Property, Location, Beds, Baths, Price, Image.
+            - For each property, fill a single row with those values.
+            - Only show the Image cell if a picture URL exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone} if not empty 
+     then in new line your email {!$Input:Sender.Email} if not empty 
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_10</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called Property of Interest.
+    - Present the details in a simple two-column layout that is centered and only 60% of the space:
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists {!$Input:Property__c.Picture__c}.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: Similar Properties You May Like.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}.
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in similars, skip this entire section.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Columns (in order): Property, Location, Beds, Baths, Price, Image.
+            - For each property, fill a single row with those values.
+            - Only show the Image cell if a picture URL exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone} if not empty 
+     then in new line your email {!$Input:Sender.Email} if not empty 
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_11</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called &quot;Property of Interest&quot;.
+    - Centered, two-column “card” at 60% width with a light border and padding.
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists {!$Input:Property__c.Picture__c}.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: &quot;Similar Properties You May Like&quot;.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in payload.similars in the JSON result, skip this entire Similar properties section and don&apos;t include any random example to fill the table.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Table with bold headers: Property | Location | Beds | Baths | Price | Image
+            - For each similar property, fill a single row using its fields.
+            - Only show the Image cell if a pictureUrl exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone}  ONLY if it is a non-empty string.
+     then in new line your email {!$Input:Sender.Email}  ONLY if it is a non-empty string.
+
+Output format:
+- Produce:
+Subject: &lt;your subject line here&gt;
+Body: &lt;valid HTML for the email body here&gt;
+
+Do not include anything else besides the Subject and Body sections in the final output.
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_12</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called &quot;Property of Interest&quot;.
+    - Centered, two-column “card” at 60% width with a heavy border and padding.
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists {!$Input:Property__c.Picture__c}.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: &quot;Similar Properties You May Like&quot;.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in payload.similars in the JSON result, skip this entire Similar properties section and don&apos;t include any random example to fill the table.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Table with bold headers: Property | Location | Beds | Baths | Price | Image
+            - For each similar property, fill a single row using its fields.
+            - Only show the Image cell if a pictureUrl exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone}  ONLY if it is a non-empty string.
+     then in new line your email {!$Input:Sender.Email}  ONLY if it is a non-empty string.
+
+Output format:
+- Produce:
+Subject: &lt;your subject line here&gt;
+Body: &lt;valid HTML for the email body here&gt;
+
+Do not include anything else besides the Subject and Body sections in the final output.
+
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_13</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called &quot;Property of Interest&quot;.
+    - Centered, two-column “card” at 60% width with a heavy blue border and padding.
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists {!$Input:Property__c.Picture__c}.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: &quot;Similar Properties You May Like&quot;.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in payload.similars in the JSON result, skip this entire Similar properties section and don&apos;t include any random example to fill the table.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Table with bold headers: Property | Location | Beds | Baths | Price | Image
+            - For each similar property, fill a single row using its fields.
+            - Only show the Image cell if a pictureUrl exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone}  ONLY if it is a non-empty string.
+     then in new line your email {!$Input:Sender.Email}  ONLY if it is a non-empty string.
+
+Output format:
+- Produce:
+Subject: &lt;your subject line here&gt;
+Body: &lt;valid HTML for the email body here&gt;
+
+Do not include anything else besides the Subject and Body sections in the final output.
+
+</content>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_14</versionIdentifier>
+    </templateVersions>
+    <templateVersions>
+        <content>You are a real estate agent preparing a professional sales email for a prospect.
+Generate the output strictly as HTML (no Markdown, no backticks, no **bold** syntax).
+
+Context:
+- Sender: {!$Input:Sender.Name}
+- Phone: {!$Input:Sender.Phone} (omit if empty)
+- Email: {!$Input:Sender.Email} (omit if empty)
+- Organization: Dreamhouse (luxury properties)
+- Prospect: {!$Input:Recipient.Name}
+
+Goal:
+Send a polished email that (1) briefly introduces the sender, (2) highlights the specific property the prospect already showed interest in, and (3) presents a short list of similar properties.
+
+Rendering rules (important):
+- Output must include **Subject:** and **Body:** sections.
+- **Body** must be valid, self-contained **HTML only** (no &lt;html&gt; or &lt;head&gt; tags).
+- Use &lt;p&gt; for paragraphs, &lt;h2&gt;/&lt;h3&gt; for section titles, &lt;table&gt; for tabular data.
+- Use minimal inline styles only (no external stylesheets).
+- Never show placeholders, the words “null”, “undefined”, or empty labels. If any value is missing, simply omit that line/element.
+
+Subject:
+- Create a short, engaging subject that mentions the main property and city.
+ Example style: “Explore {Property Name} + nearby options in {City}”
+
+Body:
+1) Greeting &amp; intro
+  - Start with a formal greeting to {!$Input:Recipient.Name}
+  - Then start a new one short paragraph introducing {!$Input:Sender.Name} from Dreamhouse and stating that the prospect already showed interest in the main property.
+
+2) Main property (hero block)
+    - Add a heading called &quot;Property of Interest&quot; left aligned.
+    - Show this main property as a two-column “card” at 60% width in the center and give a heavy dark gray border and padding. Give it a shadow effect. Details of the card as below: 
+    - Left column: show the property information in short labeled lines. Make the label bold..
+         - Property name : {!$Input:Property__c.Name}
+         - Location : {!$Input:Property__c.City__c}
+         - Beds : {!$Input:Property__c.Beds__c}
+         - Baths : {!$Input:Property__c.Baths__c}
+         - Price : {!$Input:Property__c.Price__c}
+    - Right column: show the property image.
+         - Only include the image if a picture URL exists {!$Input:Property__c.Picture__c}.
+         - If no picture URL, leave out the image completely.
+         - limit image size to 300x300 so it is not huge
+    - Make the layout look like a “card” where the text is on the left and the image is aligned on the right.
+    - Keep it clean and easy to read, no unnecessary styling.
+
+3) Similar properties
+  Add a section titled: &quot;Similar Properties You May Like&quot;.
+     - Use the Apex grounding output from {!$Apex:PropertySimilarSalesEmailAction.Prompt}
+            - This returns a JSON object with an array called similars.
+            - Each similar property has: name, city, beds, baths, price, and pictureUrl (pictureUrl may be missing).
+    - If there are no items in payload.similars in the JSON result, skip this entire Similar properties section and don&apos;t include any random example to fill the table.
+    - If there are items:
+            - Present them in a neat table with bold headers and nice styling.
+            - Table with bold headers: Property | Location | Beds | Baths | Price | Image
+            - For each similar property, fill a single row using its fields.
+            - Only show the Image cell if a pictureUrl exists; otherwise, leave that cell out for that row.  limit image size to 200x200 so it is not huge
+   - Keep the table simple, easy to read, and consistent with the rest of the email. Avoid fancy styling.
+   - Don’t show empty labels, placeholders, or the words “null/undefined.” If a value is missing, leave it out gracefully.
+   - After the table, include one short sentence that invites the recipient to ask about any of the listed properties.
+
+4) Call to action
+  - One short paragraph inviting the recipient to reply or schedule a viewing.
+
+5) Signature (omit empty lines)
+     Add formal signature using something as Best regards
+     then in new line put your name {!$Input:Sender.Name}
+     then in new line the company name &apos;Dreamhouse&apos;
+     then in new line your phone {!$Input:Sender.Phone}  ONLY if it is a non-empty string.
+     then in new line your email {!$Input:Sender.Email}  ONLY if it is a non-empty string.
+
+Output format:
+- Produce:
+Subject: &lt;your subject line here&gt;
+Body: &lt;valid HTML for the email body here&gt;
+
+Do not include anything else besides the Subject and Body sections in the final output.
+
+</content>
+        <inputs>
+            <apiName>RelatedObject</apiName>
+            <definition>SOBJECT://Property__c</definition>
+            <referenceName>Input:Property__c</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Recipient</apiName>
+            <definition>SOBJECT://Contact</definition>
+            <referenceName>Input:Recipient</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>Sender</apiName>
+            <definition>SOBJECT://User</definition>
+            <referenceName>Input:Sender</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Published</status>
+        <templateDataProviders>
+            <definition>apex://PropertySimilarSalesEmailAction</definition>
+            <parameters>
+                <definition>SOBJECT://User</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Sender</parameterName>
+                <valueExpression>{!$Input:Sender}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Property__c</definition>
+                <isRequired>true</isRequired>
+                <parameterName>RelatedObject</parameterName>
+                <valueExpression>{!$Input:Property__c}</valueExpression>
+            </parameters>
+            <parameters>
+                <definition>SOBJECT://Contact</definition>
+                <isRequired>true</isRequired>
+                <parameterName>Recipient</parameterName>
+                <valueExpression>{!$Input:Recipient}</valueExpression>
+            </parameters>
+            <referenceName>Apex:PropertySimilarSalesEmailAction</referenceName>
+        </templateDataProviders>
+        <versionIdentifier>e2wcsS03louoAsrkeLwG0IY1Qd09bGemZxkqgk8+ba8=_15</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__salesEmail</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
