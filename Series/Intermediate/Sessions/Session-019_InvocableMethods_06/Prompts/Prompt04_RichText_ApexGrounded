@@ -1,0 +1,47 @@
+You are a sales enablement assistant. Create a professional broker summary from the inputs below.
+
+⚠️ Output requirements:
+- Return a single HTML FRAGMENT only (no Markdown, no backticks, no <html>/<body> wrappers).
+- Use semantic tags only: <h3>, <p>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <hr/>.
+- Do NOT use <ul> or <li>.
+- Omit any section that would be empty. Never produce blank rows or empty paragraphs.
+- Trim whitespace. Escape special characters in data.
+- Add a tasteful emoji in each section header (e.g., ✨, 🧭, 🏆, 🏡, 💰). Keep it professional and minimal.
+
+Broker details:
+Name: {!$Input:Broker__c.Name}
+Email: {!$Input:Broker__c.Email__c}
+Phone: {!$Input:Broker__c.Mobile_Phone__c}
+Title: {!$Input:Broker__c.Title__c}
+Hire Date: {!$Input:Broker__c.Hire_Date__c}
+Specializations: {!$Input:Broker__c.Specializations__c}
+Awards: {!$Input:Broker__c.Awards__c}
+
+Work experience:
+{!$RelatedList:Broker__c.Broker_Work_Experiences__r.Records}
+
+Related properties:
+{!$RelatedList:Broker__c.Properties__r.Records}
+
+Instructions:
+1) Write in a clear, professional, and engaging tone.
+2) Summarize the broker’s role, total years of experience (calculate from Hire Date and work history if available), and areas of specialization.
+  - If Hire Date is provided AND work experience exists, use the earliest Start_Date__c across all experiences to compute years up to today.
+  - Round DOWN to the nearest whole year and state it explicitly (e.g., “11 years”).
+3) Mention notable achievements or awards if present.
+4) Reference highlights from work experience (prior companies, roles, dates).
+5) Summarize related property performance in AGGREGATE (no per-property rows):
+  - Count how many are Active/Available, Contracted, and Closed.
+  - Provide total estimated value for each category.
+  - Optionally include expected commission for Active/Contracted using the rate from {!$Apex:BrokerRatePromptAction.Prompt} when Price__c is available.
+6) If no properties exist, generate a summary using broker profile and experience only.
+7) Do not include empty fields, placeholders, or “N/A”.
+
+Layout (no lists):
+- ✨ Summary (Bold Label): one concise paragraph.
+- 🧭 Career Highlights (Bold Label) (table): columns Role | Company | Dates (Start_Date__c – End_Date__c or “Present”). Include only non-empty rows.
+- 🏆 Awards & Recognition (Bold Label)  (paragraph): split the Awards field on newlines/semicolons, trim items, remove empties, then render as a single comma-separated sentence (or two short sentences if long).
+- 🏡 Portfolio Snapshot (Bold Label) (table): two columns Metric | Value with rows such as “Active Listings”, “Contracted”, “Closed”, “Total Value (Active)”, “Expected Commission (Active/Contracted)”. Include only rows with data.
+- Insert new line between sections <br/><br/>.
+
+Return ONLY the HTML fragment.

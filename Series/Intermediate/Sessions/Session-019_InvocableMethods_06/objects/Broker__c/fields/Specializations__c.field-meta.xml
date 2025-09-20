@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Specializations__c</fullName>
+    <description>What is the broker specialization area?</description>
+    <label>Specializations</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Luxury</fullName>
+                <default>false</default>
+                <label>Luxury</label>
+            </value>
+            <value>
+                <fullName>Waterfront</fullName>
+                <default>false</default>
+                <label>Waterfront</label>
+            </value>
+            <value>
+                <fullName>Family Homes</fullName>
+                <default>false</default>
+                <label>Family Homes</label>
+            </value>
+            <value>
+                <fullName>City Living</fullName>
+                <default>false</default>
+                <label>City Living</label>
+            </value>
+            <value>
+                <fullName>Investment</fullName>
+                <default>false</default>
+                <label>Investment</label>
+            </value>
+            <value>
+                <fullName>First-time Buyers</fullName>
+                <default>false</default>
+                <label>First-time Buyers</label>
+            </value>
+            <value>
+                <fullName>Condos</fullName>
+                <default>false</default>
+                <label>Condos</label>
+            </value>
+            <value>
+                <fullName>Historic Homes</fullName>
+                <default>false</default>
+                <label>Historic Homes</label>
+            </value>
+            <value>
+                <fullName>New Construction</fullName>
+                <default>false</default>
+                <label>New Construction</label>
+            </value>
+            <value>
+                <fullName>Suburban</fullName>
+                <default>false</default>
+                <label>Suburban</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>
