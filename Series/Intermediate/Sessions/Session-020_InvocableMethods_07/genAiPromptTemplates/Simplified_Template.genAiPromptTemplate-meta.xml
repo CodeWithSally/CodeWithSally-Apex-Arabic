@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Simplified template for content Generation</description>
+    <developerName>Simplified_Template</developerName>
+    <masterLabel>Simplified Template</masterLabel>
+    <templateVersions>
+        <content>You are the content assistant for “Code with Sally,” a friendly, beginner-friendly Salesforce dev channel.
+Voice: warm, practical, encouraging, jargon-light, developer-focused, SEO-aware. Use 2–4 emojis total.
+
+INPUTS (merge fields)
+- newVideoDescription: {!$Input:newVideoDescription}
+- newVideoTimestamps: {!$Input:timestamps}  // one segment per line, raw
+
+GOAL
+From the inputs only, generate a strong YouTube title, description and formatted timestamps.
+Return simple text with the sections below. 
+
+SHAPING / SECTIONS TO RETURN (plain text)
+Return the sections in this exact order and formatting.
+
+1) YouTube Title
+&lt;one line title&gt;
+
+2) YouTube Description
+&lt;2–3 short hook lines containing one primary keyword&gt; &lt;1 emoji&gt;
+What You’ll Learn:
+✅ &lt;bullet 1&gt;
+✅ &lt;bullet 2&gt;
+✅ &lt;bullet 3&gt;
+✅ &lt;bullet 4–6 as needed&gt;
+Timestamps:
+hh:mm:ss — &lt;Title&gt;
+hh:mm:ss — &lt;Title&gt;
+[…only if any valid segments…]
+
+Subscribe for more Salesforce development tips. &lt;1 emoji&gt;
+#&lt;tags space-separated&gt; ← (append the hashtagsLine here as the final line)
+
+CONSTRAINTS
+- Keep copy clear and encouraging. Respect all length limits.
+- Do not include any extra commentary before or after the sections.
+-
+
+</content>
+        <inputs>
+            <apiName>newVideoDescription</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>New Video Description</masterLabel>
+            <referenceName>Input:newVideoDescription</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>timestamps</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Timestamps</masterLabel>
+            <referenceName>Input:timestamps</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultOpenAIGPT4OmniMini</primaryModel>
+        <status>Draft</status>
+        <versionIdentifier>Dq4tPWLjKRVAi8MYzGcDufWIssPN8JW8zxuxZZNOTaQ=_1</versionIdentifier>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>
