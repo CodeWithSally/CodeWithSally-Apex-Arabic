@@ -1,0 +1,242 @@
+<template>
+  <lightning-card title="Code with Sally — Session Pack Generator" icon-name="custom:custom63">
+
+    <!-- Spinner -->
+    <template if:true={isWorking}>
+      <div class="slds-m-top_medium slds-text-align_center">
+        <lightning-spinner alternative-text="Generating"></lightning-spinner>
+      </div>
+    </template>
+
+    <div class="slds-p-around_medium">
+
+      <!-- Inputs -->
+      <div class="slds-box">
+        <template if:true={error}>
+          <div class="slds-m-bottom_small slds-text-color_error">{error}</div>
+        </template>
+
+        <div class="slds-form-element slds-form-element_compound">
+          <div class="slds-form-element__row">
+            <div class="slds-size_1-of-1">
+              <lightning-textarea
+                label="New Video Description"
+                value={newVideoDescription}
+                onchange={handleDescChange}
+                maxlength="5000"
+                class="textAreaBody"
+                placeholder="Describe this session in your own words…">
+              </lightning-textarea>
+
+              <lightning-textarea
+                class="slds-m-top_medium textAreaBody"
+                label="New Video Timestamps (raw)"
+                value={newVideoTimestamps}
+                onchange={handleTsChange}
+                placeholder="00:00 welcome&#10;2:15 intro&#10;6:01 demo…">
+              </lightning-textarea>
+
+              <lightning-input
+                class="slds-m-top_medium"
+                type="text"
+                label="Main Topic"
+                message-when-bad-input="Use a single topic only."
+                value={mainTopic}
+                onchange={handleTopicChange}
+                placeholder="e.g., invocable methods">
+              </lightning-input>
+
+              <lightning-combobox
+                class="slds-m-top_medium"
+                label="Language"
+                value={language}
+                options={languageOptions}
+                onchange={handleLangChange}>
+              </lightning-combobox>
+
+              <div class="slds-m-top_large">
+                <lightning-button
+                  variant="brand"
+                  label="Generate Session Pack"
+                  onclick={handleGenerate}
+                  disabled={isWorking}>
+                </lightning-button>
+                <template if:true={resultJson}>
+                  <lightning-button class="slds-m-left_small" label="Copy Raw JSON" onclick={copyJson}></lightning-button>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Output -->
+      <template if:true={pack}>
+        <div class="slds-box slds-m-top_large">
+          <lightning-card title="Output" icon-name="custom:custom3">
+            <lightning-accordion active-section-name="title" allow-multiple-sections-open>
+
+              <!-- YouTube Title -->
+              <lightning-accordion-section name="title" label="YouTube Title">
+                <div class="slds-p-around_small slds-box">
+                  <div class="slds-m-around_small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy title"
+                      onclick={copyTitle}
+                      class="slds-m-around_small"
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <lightning-formatted-text
+                    class="slds-text-font_monospace slds-wrap"
+                    value={pack.youtubeTitle}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- YouTube Description -->
+              <lightning-accordion-section name="description" label="YouTube Description">
+                <div class="slds-p-around_small slds-box">
+                  <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy description"
+                      onclick={copyDescription}
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <!-- Converts \n to <br>, wraps nicely -->
+                  <lightning-formatted-text
+                    class="slds-text-longform slds-wrap"
+                    value={pack.youtubeDescription}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- Playlists -->
+              <lightning-accordion-section name="playlists" label="Playlists (titles)">
+                <div class="slds-p-around_small slds-box">
+                  <template if:true={pack.playlists.length}>
+                    <ul class="slds-list_dotted slds-m-left_large">
+                      <template for:each={pack.playlists} for:item="p">
+                        <li key={p} class="slds-m-vertical_xx-small">{p}</li>
+                      </template>
+                    </ul>
+                  </template>
+                  <template if:false={pack.playlists.length}>
+                    <div class="slds-text-color_weak">No playlists suggested.</div>
+                  </template>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- LinkedIn Post -->
+              <lightning-accordion-section name="linkedin" label="LinkedIn Post">
+                <div class="slds-p-around_small slds-box" >
+                  <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy LinkedIn"
+                      onclick={copyLinkedIn}
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <lightning-formatted-text
+                    class="slds-text-longform slds-wrap"
+                    value={pack.linkedinPost}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- Twitter/X Post -->
+              <lightning-accordion-section name="twitter" label="Twitter/X Post">
+                <div class="slds-p-around_small slds-box">
+                  <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy X post"
+                      onclick={copyTwitter}
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <lightning-formatted-text
+                    class="slds-text-longform slds-wrap"
+                    value={pack.twitterPost}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- Hashtags (line) -->
+              <lightning-accordion-section name="descHashTags" label="Hashtags (for description)">
+                <div class="slds-p-around_small slds-box">
+                  <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy hashtags line"
+                      onclick={copyHashtagsLine}
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <lightning-formatted-text
+                    class="slds-text-font_monospace slds-wrap"
+                    value={pack.hashtagsLine}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- Hashtags (CSV) -->
+              <lightning-accordion-section name="csvHashTags" label="Hashtags (CSV for YouTube tags)">
+                <div class="slds-p-around_small slds-box">
+                  <div class="slds-m-bottom_x-small">
+                    <lightning-button-icon
+                      icon-name="utility:copy"
+                      alternative-text="Copy hashtags CSV"
+                      onclick={copyHashtagsCSV}
+                      variant="border-filled">
+                    </lightning-button-icon>
+                  </div>
+
+                  <lightning-formatted-text
+                    class="slds-text-font_monospace slds-wrap"
+                    value={pack.hashtagsCSV}>
+                  </lightning-formatted-text>
+                </div>
+              </lightning-accordion-section>
+
+              <!-- Related Videos -->
+              <lightning-accordion-section name="relatedVideos" label="Related Videos (from context)">
+                <div class="slds-p-around_small slds-box">
+                  <template if:true={pack.relatedVideos.length}>
+                    <ul class="slds-list_ordered slds-m-left_large">
+                      <template for:each={pack.relatedVideos} for:item="v">
+                        <li key={v.url} class="slds-m-vertical_xx-small">
+                          <a href={v.url} target="_blank" rel="noopener noreferrer">{v.title}</a>
+                        </li>
+                      </template>
+                    </ul>
+
+                    <div class="slds-m-top_small">
+                      <lightning-button
+                        label="Copy as 'Title : URL' lines"
+                        onclick={copyRelatedAsPairs}
+                        variant="neutral">
+                      </lightning-button>
+                    </div>
+                  </template>
+                  <template if:false={pack.relatedVideos.length}>
+                    <div class="slds-text-color_weak">No related items found.</div>
+                  </template>
+                </div>
+              </lightning-accordion-section>
+            </lightning-accordion>
+          </lightning-card>
+        </div>
+      </template>
+    </div>
+  </lightning-card>
+</template>
