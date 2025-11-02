@@ -1,0 +1,32 @@
+<template>
+    <lightning-layout class="slds-p-around_x-small slds-border_bottom">
+        <lightning-layout-item flexibility="auto" class="slds-truncate subject" title={task.Subject}>
+            {task.Subject}
+        </lightning-layout-item>
+        <lightning-layout-item size="2" class="slds-truncate">
+            <lightning-badge label={task.Priority} class="slds-badge"></lightning-badge>
+        </lightning-layout-item>
+        <lightning-layout-item size="2" class="slds-truncate">
+            <lightning-formatted-date-time value={task.ActivityDate} year="numeric" month="short" day="2-digit"></lightning-formatted-date-time>
+        </lightning-layout-item>
+        <lightning-layout-item size="3" class="slds-text-align_right">
+            <lightning-button-icon
+                icon-name="utility:date_time"
+                alternative-text="Defer to tomorrow"
+                variant="border-filled"
+                title="Defer to tomorrow"
+                onclick={handleDefer}
+                data-id={task.Id}
+                class="slds-m-right_x-small"
+            ></lightning-button-icon>
+            <lightning-button-icon
+                icon-name="utility:check"
+                alternative-text="Complete"
+                variant="brand"
+                title="Complete task"
+                onclick={handleComplete}
+                data-id={task.Id}
+            ></lightning-button-icon>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

@@ -1,0 +1,63 @@
+<template>
+    <!-- Section container -->
+    <section class="slds-m-bottom_medium">
+        <!-- Section Header -->
+        <div class="slds-grid slds-wrap slds-m-bottom_x-small">
+            <div class="slds-col slds-size_1-of-1">
+                <h3 class="slds-text-title_caps slds-m-bottom_x-small">{groupName}</h3>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <template if:true={isEmpty}>
+            <div class="slds-text-color_weak slds-p-vertical_small slds-m-left_small">
+                No tasks in {groupNameLower}.
+            </div>
+        </template>
+
+        <!-- Tasks List -->
+        <template if:false={isEmpty}>
+            <div role="list">
+                <template for:each={itemsForGroup} for:item="row">
+                    <div key={row.id} role="listitem"
+                         class="slds-p-vertical_x-small slds-p-horizontal_small slds-grid slds-grid_align-spread slds-border_bottom">
+                        <!-- Left: Subject + Priority badge -->
+                        <div class="slds-grow slds-truncate">
+                            <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                <div class="slds-m-right_small slds-truncate" title={row.subject}>
+                                    {row.subject}
+                                </div>
+                                <lightning-badge label={row.priority}></lightning-badge>
+                            </div>
+                            <div class="slds-text-color_weak slds-text-body_small">
+                                Due: {row.formattedDue}
+                            </div>
+                        </div>
+
+                        <!-- Right: Actions -->
+                        <div class="slds-no-flex slds-grid slds-grid_align-end slds-grid_vertical-align-center">
+                            <lightning-button-icon
+                                icon-name="utility:forward"
+                                variant="border-filled"
+                                alternative-text="Defer to tomorrow"
+                                title="Defer to tomorrow"
+                                onclick={handleDeferClick}
+                                data-id={row.id}
+                                class="slds-m-right_xx-small"
+                            ></lightning-button-icon>
+
+                            <lightning-button-icon
+                                icon-name="utility:check"
+                                variant="brand"
+                                alternative-text="Complete Task"
+                                title="Complete Task"
+                                onclick={handleCompleteClick}
+                                data-id={row.id}
+                            ></lightning-button-icon>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </section>
+</template>

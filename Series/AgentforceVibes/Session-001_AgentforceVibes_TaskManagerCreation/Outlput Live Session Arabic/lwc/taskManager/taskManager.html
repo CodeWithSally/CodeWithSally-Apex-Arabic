@@ -1,0 +1,295 @@
+<template>
+    <!-- Task Manager - Phase 1 UI Prototype (Mock Data Only) -->
+    <lightning-card title="Task Manager" icon-name="standard:task">
+        <div class="slds-p-around_medium">
+            <!-- Optional header actions: refresh placeholder for Phase 5 -->
+            <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                <div class="slds-text-title_bold">Open Tasks (Mock)</div>
+                <div>
+                    <!-- Placeholder: wired in Phase 5 -->
+                    <lightning-button-icon
+                        icon-name="utility:refresh"
+                        alternative-text="Refresh"
+                        title="Refresh"
+                        variant="border-filled"
+                        disabled
+                    ></lightning-button-icon>
+                </div>
+            </div>
+
+            <!-- Render groups in fixed order without computed property access -->
+            <!-- Overdue -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="Overdue">Overdue</div>
+                    <div class="slds-text-color_weak">{countOverdue} item(s)</div>
+                </div>
+                <template if:true={hasOverdue}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.overdue} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                    <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                        <!-- Subject -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                            <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                                {row.subject}
+                                            </span>
+                                        </div>
+
+                                        <!-- Priority Badge -->
+                                        <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                            <span class={row.priorityClass} title={row.priority}>
+                                                {row.priority}
+                                            </span>
+                                        </div>
+
+                                        <!-- Due Date -->
+                                        <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                            <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                        </div>
+
+                                        <!-- Row Actions -->
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                            <lightning-button-icon
+                                                icon-name="utility:forward"
+                                                alternative-text="Defer to Tomorrow"
+                                                title="Defer to Tomorrow"
+                                                variant="border"
+                                                class="slds-m-right_x-small"
+                                                data-id={row.id}
+                                                onclick={handleDefer}
+                                            ></lightning-button-icon>
+
+                                            <lightning-button-icon
+                                                icon-name="utility:check"
+                                                alternative-text="Complete Task"
+                                                title="Complete Task"
+                                                variant="brand"
+                                                data-id={row.id}
+                                                onclick={handleComplete}
+                                            ></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                </template>
+                <template if:false={hasOverdue}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in overdue.
+                    </div>
+                </template>
+            </div>
+
+            <!-- Today -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="Today">Today</div>
+                    <div class="slds-text-color_weak">{countToday} item(s)</div>
+                </div>
+                <template if:true={hasToday}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.today} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                    <!-- Subject -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                        <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                            {row.subject}
+                                        </span>
+                                    </div>
+                                    <!-- Priority Badge -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                        <span class={row.priorityClass} title={row.priority}>{row.priority}</span>
+                                    </div>
+                                    <!-- Due Date -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                    </div>
+                                    <!-- Row Actions -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <lightning-button-icon icon-name="utility:forward" alternative-text="Defer to Tomorrow" title="Defer to Tomorrow" variant="border" class="slds-m-right_x-small" data-id={row.id} onclick={handleDefer}></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:check" alternative-text="Complete Task" title="Complete Task" variant="brand" data-id={row.id} onclick={handleComplete}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasToday}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in today.
+                    </div>
+                </template>
+            </div>
+
+            <!-- Tomorrow -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="Tomorrow">Tomorrow</div>
+                    <div class="slds-text-color_weak">{countTomorrow} item(s)</div>
+                </div>
+                <template if:true={hasTomorrow}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.tomorrow} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                    <!-- Subject -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                        <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                            {row.subject}
+                                        </span>
+                                    </div>
+                                    <!-- Priority Badge -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                        <span class={row.priorityClass} title={row.priority}>{row.priority}</span>
+                                    </div>
+                                    <!-- Due Date -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                    </div>
+                                    <!-- Row Actions -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <lightning-button-icon icon-name="utility:forward" alternative-text="Defer to Tomorrow" title="Defer to Tomorrow" variant="border" class="slds-m-right_x-small" data-id={row.id} onclick={handleDefer}></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:check" alternative-text="Complete Task" title="Complete Task" variant="brand" data-id={row.id} onclick={handleComplete}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasTomorrow}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in tomorrow.
+                    </div>
+                </template>
+            </div>
+
+            <!-- This Week -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="This Week">This Week</div>
+                    <div class="slds-text-color_weak">{countThisWeek} item(s)</div>
+                </div>
+                <template if:true={hasThisWeek}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.thisWeek} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                    <!-- Subject -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                        <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                            {row.subject}
+                                        </span>
+                                    </div>
+                                    <!-- Priority Badge -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                        <span class={row.priorityClass} title={row.priority}>{row.priority}</span>
+                                    </div>
+                                    <!-- Due Date -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                    </div>
+                                    <!-- Row Actions -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <lightning-button-icon icon-name="utility:forward" alternative-text="Defer to Tomorrow" title="Defer to Tomorrow" variant="border" class="slds-m-right_x-small" data-id={row.id} onclick={handleDefer}></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:check" alternative-text="Complete Task" title="Complete Task" variant="brand" data-id={row.id} onclick={handleComplete}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasThisWeek}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in this week.
+                    </div>
+                </template>
+            </div>
+
+            <!-- Next Week -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="Next Week">Next Week</div>
+                    <div class="slds-text-color_weak">{countNextWeek} item(s)</div>
+                </div>
+                <template if:true={hasNextWeek}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.nextWeek} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                    <!-- Subject -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                        <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                            {row.subject}
+                                        </span>
+                                    </div>
+                                    <!-- Priority Badge -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                        <span class={row.priorityClass} title={row.priority}>{row.priority}</span>
+                                    </div>
+                                    <!-- Due Date -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                    </div>
+                                    <!-- Row Actions -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <lightning-button-icon icon-name="utility:forward" alternative-text="Defer to Tomorrow" title="Defer to Tomorrow" variant="border" class="slds-m-right_x-small" data-id={row.id} onclick={handleDefer}></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:check" alternative-text="Complete Task" title="Complete Task" variant="brand" data-id={row.id} onclick={handleComplete}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasNextWeek}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in next week.
+                    </div>
+                </template>
+            </div>
+
+            <!-- Later -->
+            <div class="slds-m-bottom_large">
+                <div class="slds-grid slds-grid_align-spread slds-m-bottom_x-small">
+                    <div class="slds-text-title_caps slds-truncate" title="Later">Later</div>
+                    <div class="slds-text-color_weak">{countLater} item(s)</div>
+                </div>
+                <template if:true={hasLater}>
+                    <ul class="slds-has-dividers_around-space">
+                        <template for:each={groups.later} for:item="row">
+                            <li key={row.id} class="slds-item slds-p-around_x-small">
+                                <div class="slds-grid slds-grid_vertical-align-center slds-wrap">
+                                    <!-- Subject -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_6-of-12 slds-truncate">
+                                        <span class="slds-text-heading_small slds-truncate" title={row.subject}>
+                                            {row.subject}
+                                        </span>
+                                    </div>
+                                    <!-- Priority Badge -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-m-top_x-small slds-medium-m-top_none">
+                                        <span class={row.priorityClass} title={row.priority}>{row.priority}</span>
+                                    </div>
+                                    <!-- Due Date -->
+                                    <div class="slds-col slds-size_1-of-2 slds-medium-size_2-of-12 slds-text-color_weak slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <span title={row.activityDateLabel}>{row.activityDateLabel}</span>
+                                    </div>
+                                    <!-- Row Actions -->
+                                    <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-12 slds-text-align_right slds-m-top_x-small slds-medium-m-top_none">
+                                        <lightning-button-icon icon-name="utility:forward" alternative-text="Defer to Tomorrow" title="Defer to Tomorrow" variant="border" class="slds-m-right_x-small" data-id={row.id} onclick={handleDefer}></lightning-button-icon>
+                                        <lightning-button-icon icon-name="utility:check" alternative-text="Complete Task" title="Complete Task" variant="brand" data-id={row.id} onclick={handleComplete}></lightning-button-icon>
+                                    </div>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+                <template if:false={hasLater}>
+                    <div class="slds-text-color_weak slds-p-around_small slds-border_top slds-border_bottom">
+                        No tasks in later.
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+</template>

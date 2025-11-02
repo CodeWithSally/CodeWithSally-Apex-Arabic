@@ -1,0 +1,312 @@
+<template>
+  <!-- Root container -->
+  <div class="task-manager slds-p-around_medium">
+    <!-- Header with refresh action (mock refresh in Phase 2) -->
+    <div class="slds-grid slds-wrap slds-m-bottom_medium slds-align_absolute-center">
+      <div class="slds-col slds-size_1-of-1 slds-text-align_center">
+        <h2 class="slds-text-heading_medium">Task Manager</h2>
+        <p class="slds-text-body_small slds-text-color_weak">Connected to Apex backend (Phase 6)</p>
+      </div>
+    </div>
+
+    <!-- Loading state -->
+    <template if:true={isLoading}>
+      <div class="slds-is-relative slds-m-vertical_large">
+        <lightning-spinner alternative-text="Loading tasks" size="medium"></lightning-spinner>
+      </div>
+    </template>
+
+    <!-- Bucketed sections -->
+    <template if:false={isLoading}>
+      <div class="slds-grid slds-wrap slds-gutters">
+        <!-- Overdue -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={overdueTitle} icon-name="utility:warning">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.overdue.length}>
+                <template for:each={buckets.overdue} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold slds-text-color_error">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span class="slds-text-color_error">Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.overdue.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No overdue tasks.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+
+        <!-- Today -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={todayTitle} icon-name="utility:event">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.today.length}>
+                <template for:each={buckets.today} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span>Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.today.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No tasks due today.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+
+        <!-- Tomorrow -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={tomorrowTitle} icon-name="utility:dayview">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.tomorrow.length}>
+                <template for:each={buckets.tomorrow} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span>Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.tomorrow.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No tasks due tomorrow.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+
+        <!-- This Week -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={thisWeekTitle} icon-name="utility:weeklyview">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.thisWeek.length}>
+                <template for:each={buckets.thisWeek} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span>Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.thisWeek.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No tasks due this week.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+
+        <!-- Next Week -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={nextWeekTitle} icon-name="utility:date_input">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.nextWeek.length}>
+                <template for:each={buckets.nextWeek} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span>Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.nextWeek.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No tasks due next week.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+
+        <!-- Later -->
+        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-2 slds-p-bottom_medium">
+          <lightning-card title={laterTitle} icon-name="utility:trail">
+            <div class="slds-p-horizontal_small slds-p-vertical_x-small">
+              <template if:true={buckets.later.length}>
+                <template for:each={buckets.later} for:item="task">
+                  <div key={task.id} class="slds-media slds-media_center slds-p-vertical_x-small slds-border_bottom">
+                    <div class="slds-media__body">
+                      <div class="slds-grid slds-wrap slds-grid_vertical-align-center">
+                        <div class="slds-col slds-size_2-of-3">
+                          <div class="slds-text-title_bold">{task.subject}</div>
+                          <div class="slds-text-body_small">
+                            <span>Due: {task.dueDateLabel}</span>
+                            <template if:true={task.priority}>
+                              <span class="slds-m-left_small">• Priority: {task.priority}</span>
+                            </template>
+                          </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                          <lightning-button-icon
+                            icon-name="utility:check"
+                            variant="success"
+                            alternative-text="Complete"
+                            title="Complete"
+                            class="slds-m-right_x-small"
+                            onclick={handleComplete}
+                            data-id={task.id}
+                          ></lightning-button-icon>
+
+                          <lightning-button-menu alternative-text="Defer" onselect={handleDefer} data-id={task.id}>
+                            <lightning-menu-item value="Tomorrow" label="Defer to Tomorrow"></lightning-menu-item>
+                            <lightning-menu-item value="NextWeek" label="Defer to Next Week"></lightning-menu-item>
+                            <lightning-menu-item value="Plus2Weeks" label="Defer +2 Weeks"></lightning-menu-item>
+                            <lightning-menu-item value="CustomDays" label="Custom +N Days"></lightning-menu-item>
+                          </lightning-button-menu>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <template if:false={buckets.later.length}>
+                <p class="slds-text-body_small slds-p-vertical_small slds-text-color_weak">No later tasks.</p>
+              </template>
+            </div>
+          </lightning-card>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>

@@ -1,0 +1,12 @@
+<template>
+    <lightning-card title="Task Manager" icon-name="standard:task">
+        <div class="slds-p-around_small" oncomplete={handleComplete} ondefer={handleDefer}>
+            <c-task-manager-section title="Overdue" items={groupedTasks.Overdue}></c-task-manager-section>
+            <c-task-manager-section title="Today" items={groupedTasks.Today}></c-task-manager-section>
+            <c-task-manager-section title="Tomorrow" items={groupedTasks.Tomorrow}></c-task-manager-section>
+            <c-task-manager-section title="This Week" items={groupedTasks.ThisWeek}></c-task-manager-section>
+            <c-task-manager-section title="Next Week" items={groupedTasks.NextWeek}></c-task-manager-section>
+            <c-task-manager-section title="Later" items={groupedTasks.Later}></c-task-manager-section>
+        </div>
+    </lightning-card>
+</template>
