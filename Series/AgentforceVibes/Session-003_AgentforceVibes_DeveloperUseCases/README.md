@@ -113,6 +113,6 @@ Files include:
 ---
 
 ## **📺 YouTube Session**
-🎥 https://youtu.be/jwzKsfBiMyk
+🎥 https://youtu.be/MGVeqfI3Q_Q?si=2C-9NMBJdsKp-WyS 
 
 ---
