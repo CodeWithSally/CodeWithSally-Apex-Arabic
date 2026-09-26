@@ -4,18 +4,16 @@
   <img src="assets/yalla-salesforce-logo.png" alt="Yalla Salesforce" height="80" />
 </p>
 
+<h1 align="center" dir="ltr">From Dev To Architect: 8 Mindset Shifts You Can Start Today</h1>
+
 <div dir="rtl">
 
-<h1 align="center">من Developer لـ Architect: 8 تحولات في طريقة التفكير تقدر تبدأها النهارده</h1>
-
 <p align="center">
-  <strong>From Dev To Architect: 8 Mindset Shifts You Can Start Today</strong><br/>
-  <strong>السبت 26 سبتمبر 2026</strong> · السيشن بالعربي<br/>
-  سيشن من <strong>Code With Sally</strong> × <strong>Yalla Salesforce</strong><br/>
+  <strong>8 تحولات في طريقة التفكير تقدر تبدأها النهارده</strong><br/>
+  السبت 26 سبتمبر 2026<br/>
+  السيشن بالعربي<br/>
   تقديم <strong>سالي الغول</strong> و<strong>باسم إسماعيل</strong>
 </p>
-
-<p align="center"><a href="README.md">English version</a></p>
 
 ---
 
