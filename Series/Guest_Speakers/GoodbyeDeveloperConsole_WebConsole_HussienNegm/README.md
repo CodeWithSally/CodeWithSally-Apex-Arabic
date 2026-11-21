@@ -25,7 +25,7 @@
 
 ## 📂 في الفولدر ده
 
-الـ Slides والـ cheat sheet والـ troubleshooting checklist قريب.
+- [الـ Slides (PDF)](Code%20with%20Sally%20-%20Goodbye%20Developer%20Console.pdf): الديك كامل، ومعاه الـ cheat sheet والـ troubleshooting checklist
 
 ## 🎥 تسجيل السيشن
 
